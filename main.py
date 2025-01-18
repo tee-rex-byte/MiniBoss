@@ -1,9 +1,23 @@
-from tkinter import *
+"""
+Mini Boss Application
+
+This application is designed to help you decide what project to work on next.
+"""
+from tkinter import Tk, Label, Button, Frame, TOP
 import random as rn
-from dictionaries import *
+from dictionaries import (
+    machine_learning,
+    games,
+    data_science,
+    numpy_projects,
+    django_projects,
+    flask_projects,
+    nonsense,
+    no_nonsense)
 
 
-class MyGui:
+class MiniBoss:
+    """Main class for the Mini Boss Application"""
 
     def __init__(self):
         self.root = Tk()
@@ -140,7 +154,7 @@ class MyGui:
             "Reality": no_nonsense
         }
         encouragement_names = list(self.encouragement_to_category.keys())
-        
+
         for i, name in enumerate(encouragement_names):
             button = Button(
                 self.encouragement_frame,
@@ -156,23 +170,23 @@ class MyGui:
         self.options_frame = Frame(self.root, bg="#637074")
         self.options_frame.pack(pady=20)
 
-        self.resetButton = Button(
+        self.reset_button = Button(
             self.options_frame,
             text="Reset",
             command=self.reset,
             bg="#e67e22",
             width=10
         )
-        self.resetButton.grid(row=0, column=0, padx=5, pady=5)
+        self.reset_button.grid(row=0, column=0, padx=5, pady=5)
 
-        self.quitButton = Button(
+        self.quit_button = Button(
             self.options_frame,
             text="Quit",
             command=self.root.quit,
             bg="#c0392b",
             width=10
         )
-        self.quitButton.grid(row=0, column=1, padx=5, pady=5)
+        self.quit_button.grid(row=0, column=1, padx=5, pady=5)
 
         self.root.mainloop()
 
@@ -190,16 +204,17 @@ class MyGui:
         self.time_label.config(text=f"You have {selected_category} to complete the project")
 
     def show_encouragement(self, category):
+        """Shows words of encouragement based on the category"""
         selected_category = self.encouragement_to_category[category]
         random_encouragement = rn.choice(list(selected_category.values()))
         self.encouragement_label.config(text=f"{category} words: {random_encouragement}")
 
     def reset(self):
+        """Resets the labels to their default values"""
         self.result_label.config(text="Click a button to see a random project")
         self.time_label.config(text="Do you know how to do this?")
         self.encouragement_label.config(text="Words of encouragement")
 
 
 
-MyGui()
-
+MiniBoss()
